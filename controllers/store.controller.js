@@ -97,7 +97,6 @@ exports.addToCart = async (req, res) => {
     if (course_id) whereClause.course_id = course_id;
     if (package_id) whereClause.package_id = package_id;
     if (flashcard_product_id) whereClause.flashcard_product_id = flashcard_product_id;
-    if (feature_type) whereClause.feature_type = feature_type;
 
     const [item, created] = await CartItem.findOrCreate({
       where: whereClause,
@@ -272,7 +271,7 @@ exports.checkout = async (req, res) => {
     try {
       const paytabsResponse = await axios.post('https://secure-jordan.paytabs.com/payment/request', paytabsPayload, {
         headers: {
-          'authorization': process.env.PAYTABS_SERVER_KEY || 'YOUR_SERVER_KEY_HERE',
+          'authorization': process.env.PAYTABS_SERVER_KEY ,
           'content-type': 'application/json'
         }
       });
